@@ -15,7 +15,6 @@ const components = {
 const styles = {
     card: {
         width: 400,
-        margin: 10,
     },
 }
 

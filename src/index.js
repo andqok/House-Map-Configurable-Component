@@ -39,7 +39,7 @@ class App extends React.Component {
     return <Grid container spacing={16} >
       {
         this.state.houseMapList.map(el =>
-          <Grid>
+          <Grid item key={el.id}>
             <HouseMap
               item
               key={el.id}
