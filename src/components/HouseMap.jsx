@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import Image from './Image.jsx'
 import Price from './Price.jsx'
@@ -13,7 +13,7 @@ const components = {
 }
 const templateId = 3
 
-export default class HouseMap extends React.Component {
+export default class HouseMap extends Component {
     constructor(props) {
         super(props)
         this.state = {
