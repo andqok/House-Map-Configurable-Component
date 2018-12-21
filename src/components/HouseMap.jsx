@@ -12,12 +12,12 @@ const components = {
     'PRICE': Price,
     'AREA': Area
 }
+const templateId = 3
 
 export default class HouseMap extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
             template: []
         }
     }
@@ -26,16 +26,26 @@ export default class HouseMap extends React.Component {
             { this.state.template.map((item) => {
                 let Item = components[item.component]
                 return <Item key={item.component}
-                             value={this.props.options[ item.field ]}
-                             children={this.props.options.children}/>
+                             value={this.props.options[ item.field ]}>
+                             { this.getChildComponents(item.children) }</Item>
             }) }
         </div>
+    }
+    getChildComponents(/** array */ children) {
+        if (children && Array.isArray(children)) {
+            return children.map((item, index ) => {
+                let Item = components[item.component]
+                return <Item key={index} value={this.props.options[item.field]}/>
+            })
+        } else {
+            return [null]
+        }
     }
     componentDidMount() {
         axios.get('http://demo4452328.mockable.io/templates')
              .then(response => {
                 let chosenTemplate = response.data.filter(el => {
-                    return el.id === 3
+                    return el.id === templateId
                 })[0].template
                 let newState = this.state
                 newState.template = chosenTemplate
