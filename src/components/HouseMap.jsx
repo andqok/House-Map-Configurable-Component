@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
 import Image from './Image.jsx'
 import Price from './Price.jsx'
@@ -25,8 +24,9 @@ export default class HouseMap extends React.Component {
         return <div>
             { this.state.template.map((item) => {
                 let Item = components[item.component]
+                let field = this.props.options[ item.field ]
                 return <Item key={item.component}
-                             value={this.props.options[ item.field ]}>
+                             field={field}>
                              { this.getChildComponents(item.children) }</Item>
             }) }
         </div>
@@ -35,7 +35,8 @@ export default class HouseMap extends React.Component {
         if (children && Array.isArray(children)) {
             return children.map((item, index ) => {
                 let Item = components[item.component]
-                return <Item key={index} value={this.props.options[item.field]}/>
+                let field = this.props.options[item.field]
+                return <Item key={index} field={field}/>
             })
         } else {
             return [null]
